@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phiếu Khảo Sát Người Dân - Phường Tùng Thiện</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for radio buttons */
+        input[type="radio"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            cursor: pointer;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 text-gray-800 font-sans p-4 md:p-8">
+
+    <div class="max-w-5xl mx-auto bg-white shadow-lg rounded-xl overflow-hidden">
+        <div class="bg-blue-700 text-white p-6 text-center">
+            <h2 class="text-sm font-semibold uppercase tracking-wider mb-1">Ủy ban nhân dân Phường Tùng Thiện</h2>
+            <h1 class="text-2xl md:text-3xl font-bold mt-2 mb-2">PHIẾU KHẢO SÁT NGƯỜI DÂN</h1>
+            <p class="text-sm md:text-base opacity-90 max-w-3xl mx-auto">
+                MỨC ĐỘ HÀI LÒNG ĐỐI VỚI SỰ PHỤC VỤ CỦA CƠ QUAN HÀNH CHÍNH NHÀ NƯỚC
+            </p>
+        </div>
+
+        <form id="surveyForm" class="p-6 md:p-10 space-y-8">
+
+            <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
+                <h2 class="text-lg font-bold text-blue-900 border-b border-blue-200 pb-2 mb-4 uppercase">A. Thông tin
+                    chung</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block font-medium text-gray-700 mb-2">1. Mã số phiếu <span
+                                class="text-red-500">*</span></label>
+                        <input type="number" id="maSoPhieu" name="maSoPhieu" required min="201" max="500"
+                            class="w-full border-2 border-gray-300 p-3 rounded-lg focus:border-blue-500 focus:outline-none"
+                            placeholder="Nhập số từ 201 - 500">
+                        <p id="maSoError" class="text-red-500 text-xs mt-1 hidden font-medium">⚠️ Mã số phiếu phải nằm
+                            trong khoảng từ 201 đến 500.</p>
+                    </div>
+                    <div>
+                        <label class="block font-medium text-gray-700 mb-2">2. Lĩnh vực thực hiện thủ tục hành chính tại
+                            phường</label>
+                        <input type="text" id="linhVuc" name="linhVuc"
+                            class="w-full border-2 border-gray-300 p-3 rounded-lg focus:border-blue-500 focus:outline-none"
+                            placeholder="Ví dụ: Đăng ký kết hôn, Khai sinh...">
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <h2 class="text-lg font-bold text-blue-900 border-b-2 border-blue-700 pb-2 uppercase">B. Ý kiến đánh giá
+                    về sự phục vụ của cơ quan hành chính</h2>
+                <p class="text-sm text-gray-600 italic">Xin vui lòng chọn một mức độ đánh giá phù hợp nhất cho mỗi tiêu
+                    chí dưới đây:</p>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse border border-gray-200 min-w-[600px]">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-700">
+                                <th class="p-3 border border-gray-200 w-1/2">Tiêu chí đánh giá</th>
+                                <th class="p-3 border border-gray-200 text-center w-[10%]">Rất HL</th>
+                                <th class="p-3 border border-gray-200 text-center w-[10%]">Hài lòng</th>
+                                <th class="p-3 border border-gray-200 text-center w-[10%]">Bình thường</th>
+                                <th class="p-3 border border-gray-200 text-center w-[10%]">Không HL</th>
+                                <th class="p-3 border border-gray-200 text-center w-[10%]">Rất KHL</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <script>
+                                const criteriaB = [
+                                    "1. Trụ sở cơ quan sạch sẽ, văn minh, có sơ đồ chỉ dẫn rõ ràng.",
+                                    "2. Trang thiết bị phục vụ người dân đầy đủ, hoạt động tốt (bàn ghế, nước uống, máy tính...).",
+                                    "3. Thủ tục hành chính được niêm yết công khai, đầy đủ, dễ tiếp cận.",
+                                    "4. Thành phần hồ sơ người dân phải nộp đúng theo quy định.",
+                                    "5. Phí, lệ phí được công khai và thu đúng quy định (nếu có).",
+                                    "6. Thời hạn giải quyết hồ sơ đúng quy định pháp luật.",
+                                    "7. Công chức tiếp nhận hồ sơ có thái độ lịch sự, tôn trọng người dân.",
+                                    "8. Công chức lắng nghe và giải thích đầy đủ các ý kiến, thắc mắc.",
+                                    "9. Công chức hướng dẫn hồ sơ dễ hiểu, tận tình, chu đáo.",
+                                    "10. Công chức xử lý công việc chuyên nghiệp, thành thạo.",
+                                    "11. Kết quả giải quyết thủ tục hành chính chính xác, đầy đủ.",
+                                    "12. Kết quả được trả đúng hẹn theo phiếu tiếp nhận.",
+                                    "13. Trường hợp chậm trễ, cơ quan có văn bản xin lỗi và hẹn ngày trả rõ ràng.",
+                                    "14. Cơ quan tiếp nhận và xử lý nhanh chóng các phản ánh, kiến nghị.",
+                                    "15. Không có hiện tượng công chức sách nhiễu, gây phiền hà.",
+                                    "16. Không phải đi lại nhiều lần để hoàn thiện một loại hồ sơ.",
+                                    "17. Hình thức nộp hồ sơ trực tuyến thuận tiện, dễ thao tác (nếu có sử dụng).",
+                                    "18. Đánh giá tổng thể về sự phục vụ của cơ quan hành chính."
+                                ];
+                                criteriaB.forEach((text, index) => {
+                                    const qNum = index + 1;
+                                    document.write(`
+                                        <tr class="hover:bg-blue-50/50 transition">
+                                            <td class="p-3 border border-gray-200 font-medium text-gray-700">${text}</td>
+                                            <td class="p-3 border border-gray-200 text-center"><input type="radio" name="q_${qNum}" value="5" required></td>
+                                            <td class="p-3 border border-gray-200 text-center"><input type="radio" name="q_${qNum}" value="4"></td>
+                                            <td class="p-3 border border-gray-200 text-center"><input type="radio" name="q_${qNum}" value="3"></td>
+                                            <td class="p-3 border border-gray-200 text-center"><input type="radio" name="q_${qNum}" value="2"></td>
+                                            <td class="p-3 border border-gray-200 text-center"><input type="radio" name="q_${qNum}" value="1"></td>
+                                        </tr>
+                                    `);
+                                });
+                            </script>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <h2 class="text-lg font-bold text-blue-900 border-b-2 border-blue-700 pb-2 uppercase">C. Ý kiến về sự
+                    phát triển của chính quyền địa phương</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse border border-gray-200 min-w-[600px]">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-700">
+                                <th class="p-3 border border-gray-200 w-1/2">Tiêu chí đánh giá</th>
+                                <th class="p-3 border border-gray-200 text-center w-[10%]">Rất HL</th>
+                                <th class="p-3 border border-gray-200 text-center w-[10%]">Hài lòng</th>
+                                <th class="p-3 border border-gray-200 text-center w-[10%]">Bình thường</th>
+                                <th class="p-3 border border-gray-200 text-center w-[10%]">Không HL</th>
+                                <th class="p-3 border border-gray-200 text-center w-[10%]">Rất KHL</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <script>
+                                const criteriaC = [
+                                    "1. Chính quyền tổ chức lấy ý kiến của người dân về các kế hoạch phát triển kinh tế - xã hội tại địa phương.",
+                                    "2. Các thông tin về quy hoạch đất đai, ngân sách, chính sách an sinh xã hội được công khai minh bạch.",
+                                    "3. Các cuộc họp, hội nghị nhân dân được tổ chức định kỳ, hiệu quả.",
+                                    "4. Các phản ánh, kiến nghị của nhân dân về an ninh trật tự, môi trường được giải quyết kịp thời.",
+                                    "5. Hạ tầng giao thông, chiếu sáng công cộng tại địa bàn được quan tâm đầu tư, cải thiện.",
+                                    "6. Công tác cải cách hành chính, chuyển đổi số tạo điều kiện thuận lợi cho cuộc sống người dân.",
+                                    "7. Đội ngũ cán bộ, công chức cơ sở gần gũi, lắng nghe và có trách nhiệm với nhân dân.",
+                                    "8. Đánh giá chung về sự nỗ lực phát triển của chính quyền địa phương."
+                                ];
+                                criteriaC.forEach((text, index) => {
+                                    const cqNum = index + 1;
+                                    document.write(`
+                                        <tr class="hover:bg-blue-50/50 transition">
+                                            <td class="p-3 border border-gray-200 font-medium text-gray-700">${text}</td>
+                                            <td class="p-3 border border-gray-200 text-center"><input type="radio" name="cq_${cqNum}" value="5" required></td>
+                                            <td class="p-3 border border-gray-200 text-center"><input type="radio" name="cq_${cqNum}" value="4"></td>
+                                            <td class="p-3 border border-gray-200 text-center"><input type="radio" name="cq_${cqNum}" value="3"></td>
+                                            <td class="p-3 border border-gray-200 text-center"><input type="radio" name="cq_${cqNum}" value="2"></td>
+                                            <td class="p-3 border border-gray-200 text-center"><input type="radio" name="cq_${cqNum}" value="1"></td>
+                                        </tr>
+                                    `);
+                                });
+                            </script>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                <h2 class="text-lg font-bold text-gray-800 border-b border-gray-300 pb-2 mb-4 uppercase">D. Thông tin
+                    nhân khẩu học</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <label class="block font-medium text-gray-700 mb-2">1. Giới tính <span
+                                class="text-red-500">*</span></label>
+                        <div class="space-y-2 mt-1">
+                            <label class="flex items-center space-x-3 cursor-pointer">
+                                <input type="radio" name="gioiTinh" value="Nam" required
+                                    class="text-blue-600 focus:ring-blue-500">
+                                <span>Nam</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer">
+                                <input type="radio" name="gioiTinh" value="Nữ"
+                                    class="text-blue-600 focus:ring-blue-500">
+                                <span>Nữ</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block font-medium text-gray-700 mb-2">2. Độ tuổi <span
+                                class="text-red-500">*</span></label>
+                        <div class="space-y-2 mt-1">
+                            <label class="flex items-center space-x-3 cursor-pointer">
+                                <input type="radio" name="doTuoi" value="Dưới 30 tuổi" required
+                                    class="text-blue-600 focus:ring-blue-500">
+                                <span>Dưới 30 tuổi</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer">
+                                <input type="radio" name="doTuoi" value="Từ 30 đến 50 tuổi"
+                                    class="text-blue-600 focus:ring-blue-500">
+                                <span>Từ 30 đến 50 tuổi</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer">
+                                <input type="radio" name="doTuoi" value="Trên 50 tuổi"
+                                    class="text-blue-600 focus:ring-blue-500">
+                                <span>Trên 50 tuổi</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block font-medium text-gray-700 mb-2">3. Trình độ học vấn <span
+                                class="text-red-500">*</span></label>
+                        <div class="space-y-2 mt-1">
+                            <label class="flex items-center space-x-3 cursor-pointer">
+                                <input type="radio" name="trinhDo" value="Dưới Đại học" required
+                                    class="text-blue-600 focus:ring-blue-500">
+                                <span>Dưới Đại học (THPT, Trung cấp,...)</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer">
+                                <input type="radio" name="trinhDo" value="Đại học"
+                                    class="text-blue-600 focus:ring-blue-500">
+                                <span>Đại học</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer">
+                                <input type="radio" name="trinhDo" value="Sau Đại học"
+                                    class="text-blue-600 focus:ring-blue-500">
+                                <span>Sau Đại học (Thạc sĩ, Tiến sĩ)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-4 text-center">
+                <button type="submit"
+                    class="w-full md:w-1/2 bg-blue-700 hover:bg-blue-800 text-white font-bold py-4 px-6 rounded-lg shadow-md hover:shadow-lg transition transform active:scale-[0.98] text-lg tracking-wide">
+                    GỬI PHIẾU KHẢO SÁT
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div id="messageModal"
+        class="fixed inset-0 bg-gray-900/60 backdrop-blur-sm flex items-center justify-center p-4 hidden z-50 animate-fade-in">
+        <div
+            class="bg-white rounded-xl shadow-2xl p-6 max-w-sm w-full text-center border border-gray-100 transform scale-100 transition-transform">
+            <div id="modalIcon" class="text-5xl mb-4">✅</div>
+            <h3 id="modalTitle" class="text-xl font-bold text-gray-900 mb-2">Tiêu đề thông báo</h3>
+            <p id="modalMessage" class="text-gray-600 mb-6 text-sm leading-relaxed">Nội dung thông báo chi tiết xuất
+                hiện tại đây.</p>
+            <button onclick="closeModal()"
+                class="w-full bg-gray-900 hover:bg-gray-800 text-white font-semibold py-2.5 px-4 rounded-lg transition">
+                Đóng
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const maSoInput = document.getElementById('maSoPhieu');
+        const maSoError = document.getElementById('maSoError');
+        const modal = document.getElementById('messageModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalMessage = document.getElementById('modalMessage');
+        const modalIcon = document.getElementById('modalIcon');
+
+        // THAY URL ỨNG DỤNG WEB BẠN VỪA COPY Ở BƯỚC 3 VÀO ĐÂY
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwcUPgRIuwiDFN292KIpuigFaOD-KrB-vmthCDqn2kLqyPzXJzqE-1X_jeS5Lkkwgnsng/exec";
+
+        // Validation Real-time cho Mã số phiếu
+        maSoInput.addEventListener('input', function () {
+            const val = parseInt(this.value);
+            if (val < 201 || val > 500) {
+                this.classList.add('border-red-500', 'bg-red-50');
+                this.classList.remove('border-gray-300');
+                maSoError.classList.remove('hidden');
+            } else {
+                this.classList.remove('border-red-500', 'bg-red-50');
+                this.classList.add('border-gray-300');
+                maSoError.classList.add('hidden');
+            }
+        });
+
+        function showModal(title, message, isSuccess) {
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+            modalIcon.innerHTML = isSuccess ? '✅' : '❌';
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+        }
+
+        document.getElementById('surveyForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const maSo = parseInt(maSoInput.value);
+
+            // Chặn gửi nếu mã số sai
+            if (isNaN(maSo) || maSo < 201 || maSo > 500) {
+                showModal("Lỗi Nhập Liệu", "Mã số phiếu không hợp lệ! Vui lòng nhập số từ 201 đến 500.", false);
+                maSoInput.focus();
+                return;
+            }
+
+            // Hiển thị trạng thái đang xử lý (Tránh người dân bấm liên tục)
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Đang gửi dữ liệu...";
+
+            // Thu thập toàn bộ dữ liệu tự động từ các thẻ Input có thuộc tính 'name'
+            const formData = new FormData(this);
+
+            // Chuyển đổi dữ liệu sang URL-encoded format để gửi POST lên Apps Script
+            const searchParams = new URLSearchParams();
+            for (const pair of formData) {
+                searchParams.append(pair[0], pair[1]);
+            }
+
+            if (SCRIPT_URL === "URL_CUA_APPS_SCRIPT_VAO_DAY") {
+                showModal("Cấu hình chưa hoàn tất", "Vui lòng mở file HTML bằng Notepad/VS Code và thay thế 'URL_CUA_APPS_SCRIPT_VAO_DAY' bằng link Web App bạn nhận được ở Bước 3.", false);
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalBtnText;
+                return;
+            }
+
+            // Tiến hành đẩy dữ liệu bằng Fetch API lên Google Sheets
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: searchParams,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
+                .then(response => response.json())
+                .then(res => {
+                    if (res.result === "success") {
+                        showModal("Thành công!", "Cảm ơn Ông/Bà đã dành thời gian tham gia khảo sát. Hệ thống đã ghi nhận phiếu số " + res.maSo + ".", true);
+                        this.reset(); // Xóa trắng form sau khi gửi thành công
+                    } else {
+                        showModal("Lỗi Hệ Thống", "Không thể lưu dữ liệu: " + res.error, false);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    showModal("Lỗi Kết Nối", "Có lỗi xảy ra trong quá trình truyền tải dữ liệu hoặc cấu hình URL chưa đúng. Vui lòng thử lại sau.", false);
+                })
+                .finally(() => {
+                    // Khôi phục lại trạng thái nút bấm
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalBtnText;
+                });
+        });
+    </script>
+</body>
+
+</html>
