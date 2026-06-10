@@ -250,6 +250,7 @@
         </div>
     </div>
 
+    <script src="config.js"></script>
     <script>
         const maSoInput = document.getElementById('maSoPhieu');
         const maSoError = document.getElementById('maSoError');
@@ -258,8 +259,7 @@
         const modalMessage = document.getElementById('modalMessage');
         const modalIcon = document.getElementById('modalIcon');
 
-        // URL
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwcUPgRIuwiDFN292KIpuigFaOD-KrB-vmthCDqn2kLqyPzXJzqE-1X_jeS5Lkkwgnsng/exec";
+        // URL được lấy từ file config.js
 
         // Validation Real-time cho Mã số phiếu
         maSoInput.addEventListener('input', function () {
