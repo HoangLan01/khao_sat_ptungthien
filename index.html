@@ -36,19 +36,9 @@
             <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
                 <h2 class="text-lg font-bold text-blue-900 border-b border-blue-200 pb-2 mb-4 uppercase">A. Thông tin
                     chung</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 gap-6">
                     <div>
-                        <label class="block font-medium text-gray-700 mb-2">1. Mã số phiếu <span
-                                class="text-red-500">*</span></label>
-                        <input type="number" id="maSoPhieu" name="maSoPhieu" required min="201" max="500"
-                            class="w-full border-2 border-gray-300 p-3 rounded-lg focus:border-blue-500 focus:outline-none"
-                            placeholder="Nhập số từ 201 - 500">
-                        <p id="maSoError" class="text-red-500 text-xs mt-1 hidden font-medium">⚠️ Mã số phiếu phải nằm
-                            trong khoảng từ 201 đến 500.</p>
-                    </div>
-                    <div>
-                        <label class="block font-medium text-gray-700 mb-2">2. Lĩnh vực thực hiện thủ tục hành chính tại
-                            phường</label>
+                        <label class="block font-medium text-gray-700 mb-2">Lĩnh vực thực hiện thủ tục hành chính tại phường</label>
                         <input type="text" id="linhVuc" name="linhVuc"
                             class="w-full border-2 border-gray-300 p-3 rounded-lg focus:border-blue-500 focus:outline-none"
                             placeholder="Ví dụ: Đăng ký kết hôn, Khai sinh...">
@@ -252,28 +242,12 @@
 
     <script src="config.js"></script>
     <script>
-        const maSoInput = document.getElementById('maSoPhieu');
-        const maSoError = document.getElementById('maSoError');
         const modal = document.getElementById('messageModal');
         const modalTitle = document.getElementById('modalTitle');
         const modalMessage = document.getElementById('modalMessage');
         const modalIcon = document.getElementById('modalIcon');
 
         // URL được lấy từ file config.js
-
-        // Validation Real-time cho Mã số phiếu
-        maSoInput.addEventListener('input', function () {
-            const val = parseInt(this.value);
-            if (val < 201 || val > 500) {
-                this.classList.add('border-red-500', 'bg-red-50');
-                this.classList.remove('border-gray-300');
-                maSoError.classList.remove('hidden');
-            } else {
-                this.classList.remove('border-red-500', 'bg-red-50');
-                this.classList.add('border-gray-300');
-                maSoError.classList.add('hidden');
-            }
-        });
 
         function showModal(title, message, isSuccess) {
             modalTitle.textContent = title;
@@ -288,15 +262,6 @@
 
         document.getElementById('surveyForm').addEventListener('submit', function (e) {
             e.preventDefault();
-
-            const maSo = parseInt(maSoInput.value);
-
-            // Chặn gửi nếu mã số sai
-            if (isNaN(maSo) || maSo < 201 || maSo > 500) {
-                showModal("Lỗi Nhập Liệu", "Mã số phiếu không hợp lệ! Vui lòng nhập số từ 201 đến 500.", false);
-                maSoInput.focus();
-                return;
-            }
 
             // Hiển thị trạng thái đang xử lý (Tránh người dân bấm liên tục)
             const submitBtn = this.querySelector('button[type="submit"]');
